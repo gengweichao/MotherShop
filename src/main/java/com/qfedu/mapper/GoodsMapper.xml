@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.com.qfedu.dao.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.com.qfedu.pojo.Goods">
+    <id column="gid" jdbcType="INTEGER" property="gid" />
+    <result column="goodsname" jdbcType="VARCHAR" property="goodsname" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="typeId" jdbcType="INTEGER" property="typeid" />
+    <result column="cm" jdbcType="DOUBLE" property="cm" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="discount" jdbcType="INTEGER" property="discount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    gid, goodsname, price, score, img, typeId, cm, color, discount
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods
+    where gid = #{gid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_goods
+    where gid = #{gid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.com.qfedu.pojo.Goods">
+    insert into t_goods (gid, goodsname, price, 
+      score, img, typeId, 
+      cm, color, discount)
+    values (#{gid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{score,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{typeid,jdbcType=INTEGER}, 
+      #{cm,jdbcType=DOUBLE}, #{color,jdbcType=VARCHAR}, #{discount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.com.qfedu.pojo.Goods">
+    insert into t_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gid != null">
+        gid,
+      </if>
+      <if test="goodsname != null">
+        goodsname,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="typeid != null">
+        typeId,
+      </if>
+      <if test="cm != null">
+        cm,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="discount != null">
+        discount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gid != null">
+        #{gid,jdbcType=INTEGER},
+      </if>
+      <if test="goodsname != null">
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null">
+        #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="cm != null">
+        #{cm,jdbcType=DOUBLE},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null">
+        #{discount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.com.qfedu.pojo.Goods">
+    update t_goods
+    <set>
+      <if test="goodsname != null">
+        goodsname = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="typeid != null">
+        typeId = #{typeid,jdbcType=INTEGER},
+      </if>
+      <if test="cm != null">
+        cm = #{cm,jdbcType=DOUBLE},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null">
+        discount = #{discount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.com.qfedu.pojo.Goods">
+    update t_goods
+    set goodsname = #{goodsname,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      score = #{score,jdbcType=INTEGER},
+      img = #{img,jdbcType=VARCHAR},
+      typeId = #{typeid,jdbcType=INTEGER},
+      cm = #{cm,jdbcType=DOUBLE},
+      color = #{color,jdbcType=VARCHAR},
+      discount = #{discount,jdbcType=INTEGER}
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+</mapper>
