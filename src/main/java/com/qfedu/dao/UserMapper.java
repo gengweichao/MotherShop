@@ -1,6 +1,8 @@
 package com.qfedu.dao;
 
 import com.qfedu.pojo.User;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.Select;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer uid);
@@ -14,4 +16,9 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    //根据名字查找是否有存在的用户
+    @Select("select * from t_user where username=#{name}")
+    @ResultType(User.class)
+    User selectByName(String name);
 }
