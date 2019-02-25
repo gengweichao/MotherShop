@@ -5,6 +5,7 @@
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="../res/static/css/main.css">
   <link rel="stylesheet" type="text/css" href="../res/layui/css/layui.css">
+    <script type="text/javascript" src="../res/layui/lay/modules/jquery.js"></script>
   <script type="text/javascript" src="../res/layui/layui.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -496,5 +497,26 @@ layui.config({
 
 });
   </script>
+<script type="text/javascript">
+    var layer;
+    layui.use(['layer'], function(){
+
+        layer=layui.layer;
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'dvpage' //注意，这里的 test1 是 ID，不用加 # 号
+            ,count: 1000 //数据总数，从服务端得到
+        });
+    });
+    var appData=new Vue({
+        el:'#dvdata',
+        data:{
+            obj:{
+                code:0,
+                msg:'OK',
+                data:
+
+</script>
+
 </body>
 </html>
