@@ -21,4 +21,6 @@ public interface UserMapper {
     @Select("select * from t_user where username=#{name}")
     @ResultType(User.class)
     User selectByName(String name);
+
+
 }
