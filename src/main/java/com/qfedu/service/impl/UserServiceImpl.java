@@ -35,4 +35,22 @@ public class UserServiceImpl implements UserService {
 
 
     }
+
+    @Override
+    public ResultVo addUser(User user) {
+
+              User user1 = userDao.selectByName(user.getUsername());
+              if(user1 == null) {
+                  userDao.addUser1(user);
+                  return ResultUtil.exec(true,"注册成功",null);
+              } else {
+                  return ResultUtil.exec(false,"用户名已存在",null);
+              }
+
+
+
+
+
+
+    }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.com.qfedu.dao.InfoMapper">
-  <resultMap id="BaseResultMap" type="com.com.qfedu.pojo.Info">
+<mapper namespace="com.qfedu.dao.InfoMapper">
+  <resultMap id="BaseResultMap" type="com.qfedu.pojo.Info">
     <id column="fid" jdbcType="INTEGER" property="fid" />
     <result column="text" jdbcType="VARCHAR" property="text" />
     <result column="date" jdbcType="TIMESTAMP" property="date" />
@@ -21,13 +21,13 @@
     delete from t_info
     where fid = #{fid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.com.qfedu.pojo.Info">
+  <insert id="insert" parameterType="com.qfedu.pojo.Info">
     insert into t_info (fid, text, date, 
       infoCont, img)
     values (#{fid,jdbcType=INTEGER}, #{text,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
       #{infocont,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.com.qfedu.pojo.Info">
+  <insert id="insertSelective" parameterType="com.qfedu.pojo.Info">
     insert into t_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="fid != null">
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.com.qfedu.pojo.Info">
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.pojo.Info">
     update t_info
     <set>
       <if test="text != null">
@@ -82,7 +82,7 @@
     </set>
     where fid = #{fid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.com.qfedu.pojo.Info">
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.pojo.Info">
     update t_info
     set text = #{text,jdbcType=VARCHAR},
       date = #{date,jdbcType=TIMESTAMP},

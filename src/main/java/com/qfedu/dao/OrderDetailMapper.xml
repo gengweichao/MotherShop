@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.com.qfedu.dao.OrderDetailMapper">
-  <resultMap id="BaseResultMap" type="com.com.qfedu.pojo.OrderDetail">
+<mapper namespace="com.qfedu.dao.OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.qfedu.pojo.OrderDetail">
     <id column="did" jdbcType="INTEGER" property="did" />
     <result column="gid" jdbcType="INTEGER" property="gid" />
     <result column="num" jdbcType="INTEGER" property="num" />
@@ -20,13 +20,13 @@
     delete from t_orderdetail
     where did = #{did,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.com.qfedu.pojo.OrderDetail">
+  <insert id="insert" parameterType="com.qfedu.pojo.OrderDetail">
     insert into t_orderdetail (did, gid, num, 
       oid)
     values (#{did,jdbcType=INTEGER}, #{gid,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
       #{oid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.com.qfedu.pojo.OrderDetail">
+  <insert id="insertSelective" parameterType="com.qfedu.pojo.OrderDetail">
     insert into t_orderdetail
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="did != null">
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.com.qfedu.pojo.OrderDetail">
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.pojo.OrderDetail">
     update t_orderdetail
     <set>
       <if test="gid != null">
@@ -72,7 +72,7 @@
     </set>
     where did = #{did,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.com.qfedu.pojo.OrderDetail">
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.pojo.OrderDetail">
     update t_orderdetail
     set gid = #{gid,jdbcType=INTEGER},
       num = #{num,jdbcType=INTEGER},

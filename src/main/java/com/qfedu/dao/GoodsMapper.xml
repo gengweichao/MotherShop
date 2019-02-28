@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.com.qfedu.dao.GoodsMapper">
-  <resultMap id="BaseResultMap" type="com.com.qfedu.pojo.Goods">
+<mapper namespace="com.qfedu.dao.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.qfedu.pojo.Goods">
     <id column="gid" jdbcType="INTEGER" property="gid" />
     <result column="goodsname" jdbcType="VARCHAR" property="goodsname" />
     <result column="price" jdbcType="DOUBLE" property="price" />
@@ -25,7 +25,7 @@
     delete from t_goods
     where gid = #{gid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.com.qfedu.pojo.Goods">
+  <insert id="insert" parameterType="com.qfedu.pojo.Goods">
     insert into t_goods (gid, goodsname, price, 
       score, img, typeId, 
       cm, color, discount)
@@ -33,7 +33,7 @@
       #{score,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{typeid,jdbcType=INTEGER}, 
       #{cm,jdbcType=DOUBLE}, #{color,jdbcType=VARCHAR}, #{discount,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.com.qfedu.pojo.Goods">
+  <insert id="insertSelective" parameterType="com.qfedu.pojo.Goods">
     insert into t_goods
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="gid != null">
@@ -94,7 +94,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.com.qfedu.pojo.Goods">
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.pojo.Goods">
     update t_goods
     <set>
       <if test="goodsname != null">
@@ -124,7 +124,7 @@
     </set>
     where gid = #{gid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.com.qfedu.pojo.Goods">
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.pojo.Goods">
     update t_goods
     set goodsname = #{goodsname,jdbcType=VARCHAR},
       price = #{price,jdbcType=DOUBLE},

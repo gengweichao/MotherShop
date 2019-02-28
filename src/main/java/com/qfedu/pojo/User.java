@@ -7,7 +7,7 @@ public class User {
 
     private String password;
 
-    private Integer phone;
+    private String phone;
 
     private String email;
 
@@ -39,11 +39,11 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

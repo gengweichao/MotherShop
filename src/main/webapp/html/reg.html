@@ -5,7 +5,7 @@
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="../res/static/css/main.css">
   <link rel="stylesheet" type="text/css" href="../res/layui/css/layui.css">
-  <script type="text/javascript" src="../js/jquery-1.12.2.min.js"></script>
+  <!--<script type="text/javascript" src="../js/jquery-1.12.2.min.js"></script>-->
 <!--  <script type="text/javascript" src="../js/jquery-1.12.2.min.js"></script>-->
   <script src="../res/layui/layui.js"></script>
   <!--<script type="text/javascript" src="../res/layui/lay/modules/jquery.js"></script>-->
@@ -69,7 +69,7 @@
     <div class="login-bg">
       <div class="login-cont w1200" >
         <div class="form-box" style="width: 1000px; height: 450px; border:1px solid #d9dadc; background: #fff; position: absolute; top: 196px; right: 90px; padding:0 30px">
-          <form class="layui-form"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+          <form class="layui-form" id="fm1"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
             <div class="layui-form-item">
               <label class="layui-form-label">用户名</label>
               <div class="layui-input-block">
@@ -85,7 +85,7 @@
             <div class="layui-form-item">
               <label class="layui-form-label">确认密码</label>
               <div class="layui-input-block">
-                <input type="password" name="password1" placeholder="请输入" autocomplete="off" class="layui-input" lay-verify="required|pass1">
+                <input type="password" placeholder="请输入" autocomplete="off" class="layui-input" lay-verify="required|pass1">
               </div>
             </div>
             <div class="layui-form-item">
@@ -196,6 +196,29 @@
 
     layui.use(['form','layer','jquery'],function() {
       var form = layui.form;
+      var $ = layui.jquery;
+
+
+
+      form.on('submit(res)',function () {
+        // console.log(data.field);
+        $.ajax({
+          type:'post',
+          url:'../res.do',
+          data:$('#fm1').serialize(),
+          success:function (data) {
+            var code = data.code;
+            if (code == 1){
+
+              layer.msg('注册成功');
+              location.href = "../html/login.html";
+            }else{
+              layer.msg('用户名已存在');
+            }
+          }
+        })
+        return false;
+      });
 
 
 

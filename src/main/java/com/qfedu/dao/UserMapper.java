@@ -1,6 +1,7 @@
 package com.qfedu.dao;
 
 import com.qfedu.pojo.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
 
@@ -22,5 +23,9 @@ public interface UserMapper {
     @ResultType(User.class)
     User selectByName(String name);
 
+  /* //增加用户
+    @Insert("insert into t_user(username,password,phone,email,sex) values(#{name},#{password},#{phone},#{email},#{sex})")
+    void addUser(String name,String password,String phone,String email,String sex);*/
 
+    int addUser1(User user);
 }

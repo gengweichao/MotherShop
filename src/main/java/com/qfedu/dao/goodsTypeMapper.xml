@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.com.qfedu.dao.goodsTypeMapper">
-  <resultMap id="BaseResultMap" type="com.com.qfedu.pojo.goodsType">
+<mapper namespace="com.qfedu.dao.goodsTypeMapper">
+  <resultMap id="BaseResultMap" type="com.qfedu.pojo.goodsType">
     <id column="typeId" jdbcType="INTEGER" property="typeid" />
     <result column="pid" jdbcType="INTEGER" property="pid" />
     <result column="typename" jdbcType="VARCHAR" property="typename" />
@@ -20,13 +20,13 @@
     delete from t_goodtype
     where typeId = #{typeid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.com.qfedu.pojo.goodsType">
+  <insert id="insert" parameterType="com.qfedu.pojo.goodsType">
     insert into t_goodtype (typeId, pid, typename, 
       grade)
     values (#{typeid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{typename,jdbcType=VARCHAR}, 
       #{grade,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.com.qfedu.pojo.goodsType">
+  <insert id="insertSelective" parameterType="com.qfedu.pojo.goodsType">
     insert into t_goodtype
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="typeid != null">
@@ -57,7 +57,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.com.qfedu.pojo.goodsType">
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.pojo.goodsType">
     update t_goodtype
     <set>
       <if test="pid != null">
@@ -72,7 +72,7 @@
     </set>
     where typeId = #{typeid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.com.qfedu.pojo.goodsType">
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.pojo.goodsType">
     update t_goodtype
     set pid = #{pid,jdbcType=INTEGER},
       typename = #{typename,jdbcType=VARCHAR},
