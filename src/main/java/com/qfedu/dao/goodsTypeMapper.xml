@@ -79,4 +79,9 @@
       grade = #{grade,jdbcType=VARCHAR}
     where typeId = #{typeid,jdbcType=INTEGER}
   </update>
+
+  <!-- 查询一级菜单 -->
+  <select id="selectOnelevel" resultMap="BaseResultMap" >
+        SELECT * from t_goodtype where grade = 1
+  </select>
 </mapper>
