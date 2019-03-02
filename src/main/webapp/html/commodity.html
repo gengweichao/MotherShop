@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="../res/static/css/main.css">
   <link rel="stylesheet" type="text/css" href="../res/layui/css/layui.css">
   <script type="text/javascript" src="../res/layui/layui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 </head>
@@ -112,55 +113,21 @@
               <span>200个</span>
             </div>
             <div class="cont-list layui-clear" id="list-cont">
-              <div class="item">
+              <div id="divdata">
+              <div class="item"  v-for="p in obj.data">
                 <div class="img">
-                  <a href="javascript:;"><img src="../res/static/img/paging_img1.jpg"></a>
+                  <a href="javascript:;"><img :src="p.img"></a>
                 </div>
                 <div class="text">
-                  <p class="title">森系小清新四件套</p>
+                  <p class="title">{{p.goodsname}}</p>
                   <p class="price">
-                    <span class="pri">￥200</span>
-                    <span class="nub">1266付款</span>
+                    <span class="pri">{{p.price}}</span>
+                    <span class="nub">{{p.cm}}付款</span>
                   </p>
                 </div>
               </div>
-              <div class="item">
-                <div class="img">
-                  <a href="javascript:;"><img src="../res/static/img/paging_img2.jpg"></a>
-                </div>
-                <div class="text">
-                  <p class="title">森系小清新四件套</p>
-                  <p class="price">
-                    <span class="pri">￥200</span>
-                    <span class="nub">1266付款</span>
-                  </p>
-                </div>
               </div>
-              <div class="item">
-                <div class="img">
-                  <a href="javascript:;"><img src="../res/static/img/paging_img3.jpg"></a>
-                </div>
-                <div class="text">
-                  <p class="title">森系小清新四件套</p>
-                  <p class="price">
-                    <span class="pri">￥200</span>
-                    <span class="nub">1266付款</span>
-                  </p>
-                </div>
-              </div>
-              <div class="item">
-                <div class="img">
-                  <a href="javascript:;"><img src="../res/static/img/paging_img1.jpg"></a>
-                </div>
-                <div class="text">
-                  <p class="title">森系小清新四件套</p>
-                  <p class="price">
-                    <span class="pri">￥200</span>
-                    <span class="nub">1266付款</span>
-                  </p>
-                </div>
-              </div>
-              <div class="item">
+              <!--<div class="item">
                 <div class="img">
                   <a href="javascript:;"><img src="../res/static/img/paging_img2.jpg"></a>
                 </div>
@@ -292,7 +259,44 @@
                   </p>
                 </div>
               </div>
+              <div class="item">
+                <div class="img">
+                  <a href="javascript:;"><img src="../res/static/img/paging_img1.jpg"></a>
+                </div>
+                <div class="text">
+                  <p class="title">森系小清新四件套</p>
+                  <p class="price">
+                    <span class="pri">￥200</span>
+                    <span class="nub">1266付款</span>
+                  </p>
+                </div>
+              </div>
+              <div class="item">
+                <div class="img">
+                  <a href="javascript:;"><img src="../res/static/img/paging_img2.jpg"></a>
+                </div>
+                <div class="text">
+                  <p class="title">森系小清新四件套</p>
+                  <p class="price">
+                    <span class="pri">￥200</span>
+                    <span class="nub">1266付款</span>
+                  </p>
+                </div>
+              </div>-->
+         <!--     <div class="item">
+                <div class="img">
+                  <a href="javascript:;"><img src="../res/static/img/paging_img3.jpg"></a>
+                </div>
+                <div class="text">
+                  <p class="title">森系小清新四件套</p>
+                  <p class="price">
+                    <span class="pri">￥200</span>
+                    <span class="nub">1266付款</span>
+                  </p>
+                </div>
+              </div>-->
             </div>
+
             <!-- 模版引擎导入 -->
             <!-- <script type="text/html" id="demo">
               {{# layui.each(d.menu.milk.content,function(index,item){}}    
@@ -359,6 +363,59 @@
 
 });
 </script>
+
+  <script type="text/javascript">
+    var datae;
+    var typeId = window.location.search;
+    layui.use('jquery',function () {
+
+      var $ = layui.jquery;
+
+
+      window.onload =function () {
+        $.ajax({
+          type:"get",
+          url:"../findGoodsById.do"+typeId,
+          dataType:"json",
+          success:function(data){
+
+            if(data.code == 1){
+              loadData1(data.data);
+            }else {
+              alert(data.data);
+            }
+          }
+
+        })
+      };
+
+      function  loadData1(infos) {
+        var appData = new Vue({
+          el:"#divdata",
+          data:{
+            obj:{
+              code:0,
+              msg:"ok",
+              data:infos
+
+
+            }
+          },
+          methods: {
+            spdetail: function (tid) {
+              window.location.href = "commodity.html?typeId=" + tid;
+            }
+
+          }
+        })
+      }
+
+
+
+    })
+
+
+  </script>
 
 
 </body>

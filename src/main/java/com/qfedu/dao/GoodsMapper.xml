@@ -136,4 +136,11 @@
       discount = #{discount,jdbcType=INTEGER}
     where gid = #{gid,jdbcType=INTEGER}
   </update>
+
+  <select id="findGoodsById" parameterType="int" resultType="com.qfedu.pojo.Goods">
+    SELECT * FROM t_goods tg
+INNER JOIN t_goodtype tgo
+on tg.typeId = tgo.typeId
+where tg.typeId = #{typeId}
+  </select>
 </mapper>

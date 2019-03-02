@@ -1,6 +1,7 @@
 package com.qfedu.dao;
 
 import com.qfedu.pojo.goodsType;
+import com.qfedu.vo.MenuVo;
 
 import java.util.List;
 
@@ -20,6 +21,11 @@ public interface goodsTypeMapper {
     //查询一级菜单
     List<goodsType> selectOnelevel();
 
-    //查询一级菜单的子菜单项
+    //同时查询一级菜单的子菜单项
+    List<MenuVo> selectLevel();
+
+    //查询二级菜单分类
+
+    List<goodsType> selectTwolevel();
 
 }

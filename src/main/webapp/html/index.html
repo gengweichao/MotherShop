@@ -5,7 +5,7 @@
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="../res/static/css/main.css">
   <link rel="stylesheet" type="text/css" href="../res/layui/css/layui.css">
-  <script type="text/javascript" src="../res/layui/lay/modules/jquery.js"></script>
+ <!-- <script type="text/javascript" src="../res/layui/lay/modules/jquery.js"></script>-->
   <script type="text/javascript" src="../res/layui/layui.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -18,8 +18,8 @@
         <i class="layui-icon layui-icon-home"></i>
         <a href="#">首页</a>
       </p>
-      <div class="sn-quick-menu">
-        <div class="login"><a href="login.html">登录</a></div>
+      <div class="sn-quick-menu" id="div1">
+        <!--<div class="login"><a href="login.html">登录</a></div>-->
         <div class="sp-cart"><a href="shopcart.html">购物车</a><span>2</span></div>
       </div>
     </div>
@@ -68,56 +68,22 @@
         </div>
         <div class="category-tab-content">
           <div class="nav-con" >
-            <ul class="normal-nav layui-clear" >
+            <ul class="normal-nav layui-clear" id="uldata">
 
-              <li class="nav-item" >
+              <li class="nav-item" v-for="p in obj.data" @click="spdetail(p.typeid)">
 
-                <div id="uldata">
-                <div v-for="p in obj.data">
+                <div >
+                <div >
                 <div class="title">{{p.typename}}</div>
                 </div>
                 </div>
 
 
-                <p><a href="#">奶粉</a><a href="#">捕食</a><a href="#">营养品</a></p>
+                <!--<p><a href="#">奶粉</a><a href="#">捕食</a><a href="#">营养品</a></p>-->
                 <i class="layui-icon layui-icon-right"></i>
               </li>
 
-              <!--<li class="nav-item">
-                <div class="title">纸尿裤</div>
-                <p><a href="#">纸尿裤</a><a href="#">婴儿湿巾</a></p>
-                <i class="layui-icon layui-icon-right"></i>
-              </li>
-              <li class="nav-item">
-                <div class="title">洗护用品</div>
-                <p><a href="#">母婴洗护用品</a><a href="#">孕婴童用品</a></p>
-                <i class="layui-icon layui-icon-right"></i>
-              </li>
-              <li class="nav-item">
-                <div class="title">儿童玩具</div>
-                <p><a href="#">婴幼玩具</a><a href="#">遥控玩具</a><a href="#">积木拼插</a></p>
-                <i class="layui-icon layui-icon-right"></i>
-              </li>
-              <li class="nav-item">
-                <div class="title">车窗座椅</div>
-                <p><a href="#">婴儿推车</a><a href="#">儿童安全座骑</a></p>
-                <i class="layui-icon layui-icon-right"></i>
-              </li>
-              <li class="nav-item">
-                <div class="title">儿童童鞋</div>
-                <p><a href="#">童装</a><a href="#">童鞋</a><a href="#">婴童内衣及配饰</a></p>
-                <i class="layui-icon layui-icon-right"></i>
-              </li>
-              <li class="nav-item">
-                <div class="title">儿童图片</div>
-                <p><a href="#">0-2岁</a><a href="#">早教启蒙</a><a href="#">孕产育儿</a></p>
-                <i class="layui-icon layui-icon-right"></i>
-              </li>
-              <li class="nav-item nobor">
-                <div class="title">孕妈专区</div>
-                <p><a href="#">孕妇装</a><a href="#">背婴带</a><a href="#">母婴服务</a></p>
-                <i class="layui-icon layui-icon-right"></i>
-              </li>-->
+
             </ul>
           </div>
         </div>
@@ -532,44 +498,111 @@ layui.config({
 
 <script type="text/javascript">
   var datae;
-  layui.use('jquery',function () {
+  layui.use(['form','layer','jquery'],function () {
 
     var $ = layui.jquery;
-    var typename;
 
-    window.onload =function () {
+    window.onload =function(){fun1(),fun2()}
+    //获取菜单
+    function fun1() {
       $.ajax({
         type:"get",
-        url:"../selectOne.do",
+        url:"../selectTwo.do",
         dataType:"json",
         success:function(data){
+
           if(data.code == 1){
-            datae = data.data;
-          }else{
+            loadData1(data.data);
+          }else {
             alert(data.data);
           }
         }
 
       })
     };
+    //展示菜单
+    function  loadData1(infos) {
+      var appData = new Vue({
+        el:"#uldata",
+        data:{
+          obj:{
+            code:0,
+            msg:"ok",
+            data:infos
 
-    var appData = new Vue({
-      el:"#uldata",
-      data:{
-        obj:{
-          code:0,
-          msg:"ok",
-          data:datae
 
+          }
+        },
+        //菜单的点击时间
+        methods: {
+          spdetail: function (tid) {
+            window.location.href = "commodity.html?typeId=" + tid;
+          }
 
         }
-      }
-    })
+      })
+    }
+
+    //如果登录，显示用户名
+   function fun2() {
+      $.ajax({
+        type:"get",
+        url:"../getsession.do",
+        dataType:"json",
+        success:function(data){
+
+
+          if(data.code == 1){
+            var data1 = data.data;
+            var username = data1.username;
+
+            var html = '<div class="login"><a href="#"></a>"'+username+'"</div>';
+                html +='<div class="login"><button onclick="deletesession();">退出</button></div>';
+            $("#div1").append((html));
+          }else {
+            var html = '<div class="login"><a href="login.html">&nbsp;&nbsp;登录</a></div>';
+            $("#div1").append((html));
+          }
+        }
+
+      })
+    };
+    //删除session退出登录
+     deletesession =function(){
+      $.ajax({
+        type:"get",
+        url:"../deletesession.do",
+        dataType:"json",
+        success:function(data){
+
+
+          if(data.code == 1){
+            window.location.href ="index.html";
+          }
+        }
+
+      })
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   })
 
 
 </script>
+
+
+
 </body>
 </html>

@@ -84,4 +84,14 @@
   <select id="selectOnelevel" resultMap="BaseResultMap" >
         SELECT * from t_goodtype where grade = 1
   </select>
+    <select id="selectLevel" resultType="com.qfedu.vo.MenuVo">
+        SELECT t.typeId as tid,t.typename as tname,t.grade as tg,t1.typeId as tgs,t1.typename as tn,t1.grade as tgg FROM t_goodtype t
+INNER JOIN  t_goodtype t1
+on t.typeId = t1.pid
+    </select>
+
+  <select id="selectTwolevel" resultMap="BaseResultMap">
+    SELECT * from t_goodtype where grade = 2
+
+  </select>
 </mapper>

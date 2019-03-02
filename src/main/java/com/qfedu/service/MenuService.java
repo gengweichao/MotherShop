@@ -10,4 +10,10 @@ public interface MenuService {
 
     //获取一级菜单
     public ResultVo selectOne();
+
+    //同时获取一级菜单和子菜单
+    public ResultVo selectTwo();
+
+    //查询二级分类
+    public  ResultVo selectTwo2();
 }

@@ -21,4 +21,14 @@ public class MenuController {
     public ResultVo selectOneLevle1(){
         return menuService.selectOne();
     }
+
+    @RequestMapping("selectlevel.do")
+    public ResultVo selectOneLevle2(){
+        return menuService.selectTwo();
+    }
+
+    @RequestMapping("selectTwo.do")
+    public ResultVo selectTwo(){
+        return menuService.selectTwo2();
+    }
 }
